@@ -1,0 +1,103 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racoont</title>
+</head>
+<body>
+    <div class="col-12 all">
+        <div class="col-sm-8 content">
+
+            <!-- tool bar of links -->
+            <div class="toolbar">
+                <a routerLink="" (click)="set_LinkStyle('homelink')"><img src="assets/home1.png" alt="home" class="toolbar_icon homelink"></a>
+                <a routerLink="notification" (click)="set_LinkStyle('notification')"><img src="assets/rocket.png" alt="home" class="toolbar_icon notification"></a>
+                <a routerLink="profile" (click)="set_LinkStyle('profilelink')"><img src="assets/profile.png" alt="home" class="toolbar_icon profilelink"></a>
+                <a routerLink="chat" (click)="set_LinkStyle('chatLink')"><img src="assets/chatLink.png" alt="home" class="toolbar_icon chatLink"></a>
+                <a routerLink="friend-chat" (click)="set_LinkStyle('friendchatLink')" target="_blank" ><img src="assets/chatLink.png" alt="home" class="toolbar_icon friendchatLink"></a>
+                <br> <br>
+                <a routerLink="our-chat" (click)="set_LinkStyle('friendchatLink')" target="_blank" ><img src="assets/chat2.png" alt="home" class="toolbar_icon our-chat"></a>
+            </div>
+            <div class="col-12 posts">
+                <!-- profile content with adding new post  -->
+                <div class="col-12 profileContent" style="padding: 0px;">
+                    <div class="text-center">
+                        <img [src]="profileImg" alt="profile" class="profileImg">
+                        <form class="col-12 formStylr" [formGroup]="newPost" (ngSubmit)="addPost();">
+                            <textarea class="col-12 form-control postText" name="post_text" id="post_text" placeholder="Quoi de neuf ?" cols="10" rows="2" formControlName="post_text"></textarea>
+                            <div class="col-sm-4">
+                                <div class="form-group uploadImageInput">
+                                    <input class="form-control" type="file" name="post_phote"  id="post_phote" accept=".jpg , .png , .jpeg" formControlName="post_phote">
+                                </div>
+                            </div>
+                            <div class="col-sm-8 btnSubmitDiv ">
+                                <button type="submit" class="btnSubmit">Envoyer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="col-12 viewPosts " *ngFor="let item of posts; let i=index">
+                    <div class="col-sm-2 post_profile_icon">
+                        <img [src]="item.profile_phote" alt="photo">
+                    </div>
+
+                    <div class="col-sm-10 post_content">
+                        <p class="post_username">{{item.username}}</p>
+                        <p class="post_text" id="{{i}}">{{item.post_text}}</p>
+                        <!-- code form for edit post text -->
+                        <form [formGroup]="updatePostText" class=" _{{i}} formEdit">
+                            <textarea class="col-12 form-control postText" name="post_text" id="post_text" placeholder="Quoi de neuf ?" cols="10" rows="2" formControlName="post_text"></textarea>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btnSubmit" (click)="closeThisForm(item,item.post_id,i)">Valider modification</button>
+                            </div>
+                        </form>
+
+                        <img class="post_photo" [src]="item.post_phote">
+                        <div class="col-12 post_btn">
+                            <button class="btn_Edit" (click)="updatePost(i)"><img src="assets/edit.png" alt="icon" class="icon"></button>
+                            <button class="btn_Delete" (click)="deletePost(item.post_id)"><img src="assets/delete.png" alt="icon" class="icon"></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="col-sm-4 rightSide">
+            <div class="trend col-12">
+                <p class="trendingText">Trending</p>
+                <div class="trendingContent" *ngFor="let item of trend_arr">
+                    <img class="trendImg" [src]="item.terndImg" alt="phote">
+                    <span class="trendText">{{item.textTernd}}</span>
+                </div>
+            </div>
+
+            <div class="trend col-12 mt-2">
+                <p class="trendingText">célébrités</p>
+                <div class="trendingContent" *ngFor="let item of celebrites_arr">
+                    <img class="trendImg" [src]="item.photo" alt="phote">
+                    <span class="trendText">{{item.name}}</span>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+</body>
+</html>

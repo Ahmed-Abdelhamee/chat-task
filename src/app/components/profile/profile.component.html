@@ -1,0 +1,39 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+</head>
+<body>
+    <div class="col-12 content">
+            <div class="container">
+                <div class="col-sm-6 profilePart text-center">
+                    <div class="profile">
+                        <img [src]="user.profile_phote" alt="profile photo">
+                        <p><button class="changeImage">change d'image</button></p>
+                        <p><button class="Envoyer">Envoyer</button></p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 profilePart text-center">
+                    <div class="profiledata">
+                        <p for="bio" class="bioTexe">bio</p>
+                        <form action="">
+                            <textarea  name="bio" id="bio" cols="30" rows="4"></textarea>
+                            <div class="submit">
+                                <button type="submit" class="Envoyer btn">valider modification</button>
+                            </div>
+                        </form>
+                        <p class="text"> Member depuis le : mardi 10 nov , 2020 a 16:59:18</p>
+                        <p><button class="lasts">Abonnements : 1</button></p>
+                        <p><button class="lasts">Abonnes : 0</button></p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+</html>

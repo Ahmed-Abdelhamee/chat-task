@@ -1,0 +1,54 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat</title>
+</head>
+<body>
+    <div class="col-12 all">
+        <div class="container">
+            <p class="col-12 chatTitle">let's chat user2 with friends</p>
+            <div class="col-12  d-flex justify-content-center">
+                <select class="btn btn-outline-danger" name="chatFriend" id="chatFriend" (change)="setchat($event)">
+                    <option class="btn btn-danger p-1" value="" > users list  </option>
+                    <option class="btn btn-danger p-1 " [value]="item.user_id" *ngFor="let item of friends">{{item.username}}</option>
+                </select>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <div class="col-sm-8 chatDIv">
+                   <div *ngFor="let item of chatArray">
+                        <div *ngIf="item.chatId==chatId">
+                            <div *ngFor="let temp of item.chat">
+                                <div class="col-12 chatContent" *ngIf="temp.user_id_for_send==user.user_id">
+                                    <div class="col-sm-6 mychat">
+                                        <p>{{temp.message}}</p>
+                                        <small>{{temp.time}}</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 chatContent d-flex justify-content-end" *ngIf="temp.user_id_for_send!=user.user_id">
+                                    <div class="col-sm-6 otherChat">
+                                        <p>{{temp.message}}</p>
+                                        <small>{{temp.time}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                   <div class="chatFooter">
+                        <form class="col-12 d-flex justify-content-center" [formGroup]="sendMessage" (ngSubmit)="save()">
+                            <textarea name="msg" id="msg" cols="30" rows="3" formControlName="message"></textarea>
+                            <div class="submitDiv">
+                                <button type="submit" class="btnSubmit"><img src="assets/send.png" alt=""></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
