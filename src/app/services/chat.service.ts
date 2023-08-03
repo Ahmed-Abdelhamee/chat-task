@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireModule } from '@angular/fire/compat';
+import { Database } from '@angular/fire/database';
 import { chatAarry, chatData } from '../interfaces/chatArray.interface';
 
 @Injectable({
@@ -7,6 +9,7 @@ import { chatAarry, chatData } from '../interfaces/chatArray.interface';
 })
 export class ChatService {
 
+  constructor(private http:HttpClient, private database:Database) { }
 
   chat_Array:chatAarry[]=[
     {
@@ -94,10 +97,7 @@ export class ChatService {
   ]
 
 
-
-
-
-  constructor(private http:HttpClient) { }
+  database_url:string=this.database.app.options.databaseURL!;
 
 
   getmychat(chat_Id:string){
@@ -106,15 +106,15 @@ export class ChatService {
   getfreindchat(chat_Id:string){
     return this.chat_Array.filter(item => item.chatId == chat_Id);
   }
-
-
   get_chat(chat_Id:string){
     return this.chat_Array.filter(item => item.chatId == chat_Id);
   }
 
 
-  // post message for save chating
-  post_message(data:chatData,friend_id:string){
+  // post message for save chating 
+
+  //data:any
+  post_message(data:any,friend_id:string){
   // we make two chat id to be added in the chatArray    to   make each chat content viewed for other components
     let chat_sender=data.user_id_for_send + friend_id;
     let chat_reseiver= friend_id+data.user_id_for_send ;
@@ -133,7 +133,7 @@ export class ChatService {
       console.log(this.chat_Array)
     }
     
-    console.log(this.chat_Array[this.chat_Array.indexOf(this.chat_Array.find(item => item.chatId==chat_sender)!)].chat)
+    // console.log(this.chat_Array[this.chat_Array.indexOf(this.chat_Array.find(item => item.chatId==chat_sender)!)].chat)
 
     // console.log(this.chat_Array[this.chat_Array.indexOf(this.chat_Array.find(item => item.chatId==chat_sender)!)].chat.length)
     // console.log(this.chat_Array[this.chat_Array.indexOf(this.chat_Array.find(item => item.chatId==chat_reseiver)!)].chat.length)

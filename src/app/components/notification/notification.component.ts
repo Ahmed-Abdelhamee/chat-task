@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from "@ngrx/store";
+import { mystoreInterface } from 'src/app/store/mystore';
 
 @Component({
   selector: 'app-notification',
@@ -6,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notification.component.scss']
 })
 export class NotificationComponent implements OnInit {
+  count:any;
 
-  constructor() { }
+  constructor(private store:Store<mystoreInterface>) { 
+    store.subscribe(data=>{
+      this.count=data.counter.n
+    })
+  }
+
 
   ngOnInit(): void {
   }
@@ -18,5 +26,12 @@ export class NotificationComponent implements OnInit {
 
     console.log("     \n  "+date.toLocaleDateString()+"    "+date.toLocaleTimeString())
     console.log()
+  }
+
+  increase(){
+    this.store.dispatch({type:'increase'})
+  }
+  decrease(){
+    this.store.dispatch({type:'decrease'})
   }
 }

@@ -5,8 +5,12 @@ export interface postView{
     profile_phote?:string,
     post_text?:string,
     post_phote?:string,
-    // likes?:number,
+    likes?:string[],
     // comments:comment[]
-    user_id:number,
-    post_id:number,
+    user_id:string,
+    post_id:string,
+}
+
+export interface likesArray{
+    user_id?:"user_id"
 }

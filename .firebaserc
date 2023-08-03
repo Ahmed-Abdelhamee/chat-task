@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "chat-project-4f74c": {
+      "hosting": {
+        "chat-project": [
+          "chat-project-4f74c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "chat-project-4f74c"
+  }
+}

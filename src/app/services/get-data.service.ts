@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Database } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 import { célébrités } from '../interfaces/célébrités.interface';
 import { postView } from '../interfaces/postView.interface';
 import { trending } from '../interfaces/trending.interface';
@@ -8,43 +11,11 @@ import { trending } from '../interfaces/trending.interface';
 })
 export class GetDataService {
 
-  database_url:string="";
+  constructor(private http:HttpClient , private database:Database) { }
 
-  posts_arr:postView[]=[
-    {
-      username:"hello username",
-      profile_phote:"assets/boy.png",
-      post_text:"hello post_text",
-      post_phote:"assets/pc1.jpg",
-      post_id:1,
-      user_id:424
-    },
-    {
-      username:"hello username 2",
-      profile_phote:"assets/who.png",
-      post_text:"hello post_text 2",
-      post_phote:"assets/pc2.jpg",
-      post_id:2,
-      user_id:54
-    },
-    {
-      username:"hello username 3",
-      profile_phote:"assets/man.png",
-      post_text:"hello post_text 33",
-      post_phote:"assets/library.png",
-      post_id:3,
-      user_id:14
-    },
-    {
-      username:"hello username 4",
-      profile_phote:"assets/userr.png",
-      post_text:"hello post_text 44",
-      post_phote:"assets/login5.jpg",
-      post_id:4,
-      user_id:704
-    }
-  ]
+  database_url:string=this.database.app.options.databaseURL!;
 
+  posts_arr:postView[]=[]
 
   trend_arr:trending[]=[
    {
@@ -63,7 +34,6 @@ export class GetDataService {
     id:3
    },
   ]
-
 
   célébrités_arr:célébrités[]=[
     {
@@ -84,11 +54,23 @@ export class GetDataService {
    ]
 
 
+   element_key:string=''
 
-  constructor() { }
+
+  posts():Observable<postView[]>{
+    return this.http.get<postView[]>(`${this.database_url}/homepagePosts.json`);
+  }
 
   get_posts(){
-    // this.http.get<postView[]>(`${this.database_url}/.json`)
+    this.posts_arr=[]
+    this.posts().subscribe(data =>{
+      for (const key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          const element = data[key];
+          this.posts_arr.push(element)
+        }
+      }
+    })
     return this.posts_arr;
   }
 
@@ -104,26 +86,68 @@ export class GetDataService {
 
 
 
+  // data:postView
+  addPost(data:any){
+    this.http.post(`${this.database_url}/homepagePosts.json`,data).subscribe( );
+  }
+  addLike(post_id:string,user_id:string){
+    this.posts().subscribe(data=>{
+      for (const key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          const element = data[key];
+          if( post_id == element.post_id){ // we fetch the elements by for loop and get array key to delete the specific item
+            this.http.put(`${this.database_url}/homepagePosts/${key}/likes.json`,{"user_id":user_id}).subscribe(()=>{});
+          }
+        }
+      }
+    })
+  }
+
+
+  updatePost(data_item:postView,updatePostText:string, post_id:string){
+    data_item.post_text=updatePostText;
+    this.posts().subscribe(data=>{
+      for (const key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          const element = data[key];
+          if( post_id == element.post_id){ // we fetch the elements by for loop and get array key to delete the specific item
+            this.http.put(`${this.database_url}/homepagePosts/${key}.json`,data_item).subscribe(()=>{});
+          }
+        }
+      }
+    })
+  }
   
-  addPost(data:postView){
-    // this.http.post(`${this.url}/.json`,data).subscribe( );
-    console.log(data);
-    this.posts_arr.push(data)
+  deletePost(post_id:string){
+    // get firebase element to delete in the database 
+    this.posts().subscribe(data=>{
+      for (const key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          const element = data[key];
+          if( post_id == element.post_id){ // we fetch the elements by for loop and get array key to delete the specific item
+            this.http.delete(`${this.database_url}/homepagePosts/${key}.json`).subscribe(()=>{});
+            console.log(key)
+          }
+        }
+      }
+    })
+    
+
   }
 
-  updatePost(data:postView,updatePostText:string, post_id:number){
-    // this.http.post(`${this.url}/.json`,data).subscribe( );
+  // getElementKey_from_posts_array(post_id:string){
+  //   this.posts().subscribe(data=>{
+  //     for (const key in data) {
+  //       if (Object.prototype.hasOwnProperty.call(data, key)) {
+  //         const element = data[key];
+  //         if( post_id == element.post_id){ // we fetch the elements by for loop and get array key to delete the specific item
+  //           this.element_key=key
+  //         }
+  //       }
+  //     }
+  //     // return this.element_key
+  //   })
+  // }
 
-    let index = this.posts_arr.indexOf(this.posts_arr.find(item => item.post_id==post_id)!);
-    data.post_text=updatePostText;
-    this.posts_arr[index]=data;
-    // console.log(this.posts_arr[index])
-  }
-  
-  deletePost(post_id:number){
-    // this.http.post(`${this.url}/.json`).subscribe( );
 
-    let index = this.posts_arr.indexOf(this.posts_arr.find(item => item.post_id==post_id)!);
-    this.posts_arr.splice(index,1)
-  }
 }

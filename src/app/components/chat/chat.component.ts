@@ -63,7 +63,7 @@ export class ChatComponent implements OnInit {
 
   save(){
     this.sendMessage.patchValue({
-      user_id_for_send:this.me.user_id
+      user_id_for_send:this.me.user_id!
     })
     this.chatServ.post_message(this.sendMessage.value,this.friend_id)
   }

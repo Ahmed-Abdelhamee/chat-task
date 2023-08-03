@@ -19,14 +19,14 @@ export class AuthService {
 
   login(){
     //after login we set  user data 
-    this.user.username="user1";
-    this.user.profile_phote="assets/boy_avatar.png";
+    this.user.username="Ahmed";
+    this.user.profile_phote="https://firebasestorage.googleapis.com/v0/b/chat-project-4f74c.appspot.com/o/postImages%2Fme0.jpg_0.03981685160304327?alt=media&token=cd137363-9d0e-4650-b1fa-f923b2c89853";
     this.user.user_id="user1";
   }
 
   get_user(){
-    this.user.username="user1";
-    this.user.profile_phote="assets/boy_avatar.png";
+    this.user.username="Ahmed";
+    this.user.profile_phote="https://firebasestorage.googleapis.com/v0/b/chat-project-4f74c.appspot.com/o/postImages%2Fme0.jpg_0.03981685160304327?alt=media&token=cd137363-9d0e-4650-b1fa-f923b2c89853";
     this.user.user_id="user1";
     return this.user
   }

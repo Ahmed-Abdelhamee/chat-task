@@ -23,11 +23,11 @@
                 </select>
             </div>
             <div class="col-12 d-flex justify-content-center">
-                <div class="col-sm-8 chatDIv">
+                <div class="col-sm-12 chatDIv" #chatDIv1>
                    <div *ngFor="let item of mychatArray">
                         <div *ngIf="item.chatId==chatId">
                             <div *ngFor="let temp of item.chat">
-                                <div class="col-12 chatContent" *ngIf="temp.user_id_for_send==my_id">
+                                <div class="col-12 chatContent d-flex justify-content-start" *ngIf="temp.user_id_for_send==my_id">
                                     <div class="col-sm-6 mychat">
                                         <p>{{temp.message}}</p>
                                         <small>{{temp.time}}</small>
@@ -43,7 +43,7 @@
                         </div>
                    </div>
                     <div class="chatFooter">
-                        <form class="col-sm-6" [formGroup]="my_sendMessage" (ngSubmit)="save()">
+                        <form class="col-sm-12" [formGroup]="my_sendMessage" (ngSubmit)="save();scroll()">
                             <textarea name="msg" id="msg" cols="30" rows="3" formControlName="message"></textarea>
                             <div class="submitDiv">
                                 <button type="submit" class="btnSubmit"><img src="assets/send.png" alt=""></button>
@@ -65,8 +65,8 @@
                     <option class="btn btn-danger p-1" value="user1" > user1  </option>
                 </select>
             </div>
-            <div class="col-12 d-flex justify-content-center">
-                <div class="col-sm-8 chatDIv">
+            <div class="col-12">
+                <div class="col-sm-12 chatDIv" #chatDIv2>
                    <div *ngFor="let item of friendchatArray">
                         <div *ngIf="item.chatId==chatId2">
                             <div *ngFor="let temp of item.chat">
@@ -86,7 +86,7 @@
                         </div>
                    </div>
                     <div class="chatFooter">
-                        <form class="col-sm-6" [formGroup]="friend_sendMessage" (ngSubmit)="save2()">
+                        <form class="col-sm-12" [formGroup]="friend_sendMessage" (ngSubmit)="save2();scroll()">
                             <textarea name="msg" id="msg" cols="30" rows="3" formControlName="message"></textarea>
                             <div class="submitDiv">
                                 <button type="submit" class="btnSubmit"><img src="assets/send.png" alt=""></button>

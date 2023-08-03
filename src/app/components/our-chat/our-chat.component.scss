@@ -5,7 +5,7 @@
 
 .all{
     position: fixed;
-    top: 70px;
+    top: 40px;
     overflow: scroll;
     height: 100%;
     // padding: 0% 10%;
@@ -20,6 +20,8 @@
     font-weight: 700;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-style: italic;
+    margin-top: 25px;
+    margin-bottom: -5px;
 }
 
 .chatDIv{
@@ -27,9 +29,9 @@
     padding: 10px ;
     background-color:antiquewhite;
     border-radius: 25px;
-    height: 490px;
+    height: 369px;
     padding-bottom: 100px;
-    overflow: scroll;
+    overflow: auto;
 }
 .chatFooter{
     position: fixed;
@@ -50,6 +52,7 @@ form textarea{
 }
 
 .submitDiv{
+    position: relative;
     width: 50px;
     height: 100px;
     margin-right: 5px;
@@ -58,6 +61,7 @@ form textarea{
     border-radius: 50%;
     height: 55px;
     float: left;
+    margin-left: -25px;
 
 }
 .btnSubmit{

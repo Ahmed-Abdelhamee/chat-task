@@ -10,10 +10,8 @@
     height: 100%;
     padding: 0% 10%;
 }
-// .content{
-//     // padding: 0% 10%;
-// }
-// --------- static bar --------
+
+// -------------------------------- static Sidebar  list ----------------------------
 .toolbar{
     position: fixed;
     height: 100%;
@@ -37,21 +35,22 @@
     background-color: antiquewhite;
     border-radius: 10px;
 }
+//----------------------------------------------------------------------------------
 
 
 
-// --------- posts --------
+
+// -------------------------------------- posts -----------------------------------
 .posts{
     margin-left: 10%;
-    background: none;
     height: 100%;
-    margin-right: 5px;
     width: 90%;
     padding-top: 10px;
     overflow-wrap: normal;
     padding-bottom: 200px;
 }
-// profile style
+
+// ----------------- profile style at page top -----------------
 .profileContent{
     padding: 0px;
     background-color: rgb(255, 225, 230);
@@ -64,8 +63,7 @@
     border-radius: 50%;
     margin-bottom: 0px;
 }
-
-// form style
+// -------------- form style add post ------------
 .formStylr{
     padding: 20px;
     padding-bottom: 0px;
@@ -74,22 +72,36 @@
     cursor: pointer;
     border-radius: 25px;
 }
-
 .uploadImageInput{
     height: 40px;
     width: 40px;
     background-image: url(/assets/picture.png);
     background-size: 100%;
     margin-top: 10px;
+    float: left;
 }
 #post_phote{
     width: 100%;
     height: 100%;
     opacity: 0;
 }
-
+.msgUpload{
+    padding-top: 20px;
+    color: rgb(172, 3, 31);
+    font-weight: 700;
+    font-size: 12px;
+    float: left;
+}
+.initialPostView img{
+    height: 50px;
+    height: 50px;
+    padding: 3px;
+    margin-top: 5px;
+    border-radius: 10px;
+}
 .btnSubmit{
     margin-top: 10px;
+    margin-bottom: 10px;
     float: right;
     background-color: rgb(249, 186, 197);
     color: rgb(222, 112, 130);
@@ -100,10 +112,15 @@
     padding: 5px 15px;
 }
 
+//---------------------------------------------------
 
 
 
 
+
+
+
+// -------------------- view posts ------------------
 .viewPosts{
     margin: 7px 0px;
     padding: 20px 10px;
@@ -111,33 +128,53 @@
     box-shadow: 2px 2px 5px pink;
     border-radius: 5px;
 }
-
 .post_profile_icon{
     height: 100%;
 }
 .post_profile_icon img{
     width: 100%;
-    height: 50px;
-    border-radius: 10px;
+    height: 60px;
+    border-radius: 50%;
 }
-
 .post_username{
     font-size: 20px;
     font-weight: 600;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-transform: capitalize;
+    color: rgb(198, 71, 113);
 }
 .post_photo{
     width: 100%;
-    height: 250px;
+    height: 350px;
     border-radius: 10px;
     margin-bottom: 10px;
 }
 .post_text{
-    font-weight: 600px;
+    font-size: 17px;
+    text-align: center;
 }
 .post_content .icon{
     height: 20px;
+}
+.whiteLike{
+    width: 25px;
+    height: 25px;
+}
+.redLike{
+    position: absolute;
+    width: 31px;
+    height: 35px;
+    left: 0px;
+}
+//--------------------------------------------
+
+
+
+
+
+//-----------------post edit -----------------
+.formEdit{
+    display: none;
 }
 .post_btn{
     display: flex;
@@ -152,19 +189,19 @@
     border: none;
     border-radius: 50%;
 }
+//--------------------------------------------
 
+
+
+
+
+
+//---------------------- view right page -------------------------
 .view_page_right{
     position: relative;
     margin-left: 82;
     background-color: aqua;
 }
-
-
-.formEdit{
-    display: none;
-}
-
-
 .trend{
     background-color: pink;
     padding: 15px;
@@ -195,3 +232,6 @@
     font-weight: 600;
     font-family: 'Times New Roman', Times, serif;
 }
+
+
+//-------------------------------------------------------------------------

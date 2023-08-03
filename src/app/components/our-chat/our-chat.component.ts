@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { chatAarry } from 'src/app/interfaces/chatArray.interface';
 import { profile } from 'src/app/interfaces/profile.interface';
@@ -11,7 +11,8 @@ import { ChatService } from 'src/app/services/chat.service';
   styleUrls: ['./our-chat.component.scss']
 })
 export class OurChatComponent implements OnInit  {
-
+@ViewChild("chatDIv1") scroll_Chat1:any;
+@ViewChild("chatDIv2") scroll_Chat2:any;
 
   user:profile={
     username:"",
@@ -35,13 +36,13 @@ export class OurChatComponent implements OnInit  {
   friends:profile[]=[]
 
   my_sendMessage=this.formbuilder.group({
-    user_id_for_send:["",Validators.required],
+    user_id_for_send:["",],
     message:["",Validators.required],
   })
 
 
   friend_sendMessage=this.formbuilder.group({
-    user_id_for_send:["",Validators.required],
+    user_id_for_send:["",],
     message:["",Validators.required],
   })
 
@@ -79,12 +80,20 @@ export class OurChatComponent implements OnInit  {
     this.my_sendMessage.patchValue({
       user_id_for_send:this.my_id
     })
+    if(this.my_sendMessage.valid)
     this.chatServ.post_message(this.my_sendMessage.value,this.friend_id)
   }
   save2(){
     this.friend_sendMessage.patchValue({
       user_id_for_send:this.friend_id
     })
+    if(this.friend_sendMessage.valid)
     this.chatServ.post_message(this.friend_sendMessage.value,this.my_id)
+  }
+
+
+  scroll(){
+    this.scroll_Chat1.nativeElement.scrollTop = this.scroll_Chat1.nativeElement.scrollHeight 
+    this.scroll_Chat2.nativeElement.scrollTop = this.scroll_Chat2.nativeElement.scrollHeight 
   }
 }
